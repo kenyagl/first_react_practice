@@ -1,7 +1,7 @@
 import styles from "./FormActions.module.css";
 import Button from "../UI/Button";
 
-const FormActions = () => {
+const FormActions = (props) => {
   return (
     <p className={styles.actions}>
       <Button type="reset" className="buttonAlt">
