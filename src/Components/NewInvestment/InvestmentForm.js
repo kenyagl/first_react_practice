@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputGroup from "./InputGroup";
 import styles from "./InvestmentForm.module.css";
 import FormActions from "./FormActions";
@@ -31,9 +31,19 @@ const INPUT_GROUPS = [
 ];
 
 const InvestmentForm = (props) => {
+  const [inputData, setInputData] = useState({});
+
   const calculateHandler = (event) => {
     event.preventDefault();
     console.log("calculating");
+  };
+
+  useEffect(() => {
+    console.log("all input data:", inputData);
+  }, [inputData]);
+
+  const formDataHandler = (formGroupData) => {
+    setInputData((prevData) => ({ ...prevData, ...formGroupData }));
   };
 
   return (
@@ -42,6 +52,7 @@ const InvestmentForm = (props) => {
         <InputGroup
           key={`${inputGroup.map((input) => input.id)}`}
           inputList={inputGroup}
+          onGroupDataChange={formDataHandler}
         />
       ))}
       <FormActions />

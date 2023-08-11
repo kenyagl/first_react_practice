@@ -5,13 +5,11 @@ import styles from "./InputGroup.module.css";
 const InputGroup = (props) => {
   const [inputGroupData, setInputGroupData] = useState({});
 
-  // This effect runs whenever inputGroupData changes
   useEffect(() => {
-    console.log("group data:", inputGroupData);
+    props.onGroupDataChange(inputGroupData);
   }, [inputGroupData]);
 
   const inputHandler = (inputDataItem) => {
-    // Update the state and let the effect handle the logging
     setInputGroupData((prevGroupData) => ({
       ...prevGroupData,
       ...inputDataItem,
