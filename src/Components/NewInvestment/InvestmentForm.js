@@ -35,12 +35,13 @@ const InvestmentForm = (props) => {
 
   const calculateHandler = (event) => {
     event.preventDefault();
-    console.log("calculating");
+    console.log("Form submitted. Input data:", inputData);
+    setInputData({});
   };
 
-  useEffect(() => {
-    console.log("all input data:", inputData);
-  }, [inputData]);
+  // useEffect(() => {
+  //   console.log("all input data:", inputData);
+  // }, [inputData]);
 
   const formDataHandler = (formGroupData) => {
     setInputData((prevData) => ({ ...prevData, ...formGroupData }));
@@ -53,6 +54,7 @@ const InvestmentForm = (props) => {
           key={`${inputGroup.map((input) => input.id)}`}
           inputList={inputGroup}
           onGroupDataChange={formDataHandler}
+          inputDataValue={inputData}
         />
       ))}
       <FormActions />

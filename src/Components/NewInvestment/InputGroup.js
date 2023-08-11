@@ -25,6 +25,7 @@ const InputGroup = (props) => {
           id={inputItem.id}
           labelText={inputItem.labelText}
           onDataChange={inputHandler}
+          inputDataValue={props.inputDataValue}
         />
       ))}
     </div>
