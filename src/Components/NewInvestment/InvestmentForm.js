@@ -31,14 +31,7 @@ const INPUT_GROUPS = [
 ];
 
 const InvestmentForm = () => {
-  const [inputData, setInputData] = useState({
-    "current-savings": 0,
-    "yearly-contribution": 0,
-    "expected-return": 0,
-    duration: 0,
-  });
-
-  // useEffect(() => { console.log("Data change. Input data:", inputData)}, [inputData]);
+  const [inputData, setInputData] = useState({});
 
   const formDataHandler = (formGroupData) => {
     setInputData((prevData) => ({ ...prevData, ...formGroupData }));
@@ -48,22 +41,11 @@ const InvestmentForm = () => {
     event.preventDefault();
     console.log("Form submitted. Input data:", inputData);
 
-    setInputData((prevData) => ({
-      "current-savings": 0,
-      "yearly-contribution": 0,
-      "expected-return": 0,
-      duration: 0,
-    }));
+    resetHandler();
   };
 
   const resetHandler = () => {
-    console.log("Reset button clicked.");
-    setInputData({
-      "current-savings": 0,
-      "yearly-contribution": 0,
-      "expected-return": 0,
-      duration: 0,
-    });
+    setInputData({});
   };
 
   return (

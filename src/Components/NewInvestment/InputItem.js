@@ -9,7 +9,6 @@ const InputItem = (props) => {
     };
 
     props.onDataChange(itemData);
-    console.log("Item data: " + JSON.stringify(itemData));
   };
 
   return (
@@ -19,7 +18,7 @@ const InputItem = (props) => {
         type={props.type}
         id={props.id}
         onChange={inputHandler}
-        value={props.inputDataValue[props.id]}
+        value={props.inputDataValue[props.id] || 0}
       />
     </p>
   );
