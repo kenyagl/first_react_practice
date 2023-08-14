@@ -30,36 +30,27 @@ const INPUT_GROUPS = [
   ],
 ];
 
-const InvestmentForm = () => {
-  const [inputData, setInputData] = useState({});
+const InvestmentForm = (props) => {
+  let inputData = {};
 
   const formDataHandler = (formGroupData) => {
-    setInputData((prevData) => ({ ...prevData, ...formGroupData }));
-  };
-
-  const calculateHandler = (event) => {
-    event.preventDefault();
-    console.log("Form submitted. Input data:", inputData);
-
-    resetHandler();
-  };
-
-  const resetHandler = () => {
-    setInputData({});
+    const updatedData = {...inputData, ...formGroupData};
+    inputData = updatedData;
+    props.onDataChange(inputData);
   };
 
   return (
     <form
       className={styles.form}
-      onSubmit={calculateHandler}
-      onReset={resetHandler}
+      onSubmit={props.onCalculate}
+      onReset={props.onReset}
     >
       {INPUT_GROUPS.map((inputGroup) => (
         <InputGroup
           key={`${inputGroup.map((input) => input.id)}`}
           inputList={inputGroup}
           onGroupDataChange={formDataHandler}
-          inputDataValue={inputData}
+          inputDataValue={props.inputDataValue}
         />
       ))}
       <FormActions />
