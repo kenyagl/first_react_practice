@@ -1,31 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const InputItem = (props) => {
-  // const [inputItemData, setInputItemData] = useState("");
-
-  // useEffect(() => {
-  //   setInputItemData(props.inputDataValue);
-  // }, [props.inputDataValue]);
+  let itemData = {};
 
   const inputHandler = (event) => {
-    const updatedInputItemData = {
+    itemData = {
       [props.id]: event.target.value,
     };
 
-    // setInputItemData(event.target.value);
-    props.onDataChange(updatedInputItemData);
+    props.onDataChange(itemData);
+    console.log("Item data: " + JSON.stringify(itemData));
   };
-
-  const valueAssignHandler = () => {
-    if (props.id in props.inputDataValue) {
-      return props.inputDataValue[props.id];
-    }
-  }
 
   return (
     <p>
       <label htmlFor={props.id}>{props.labelText}</label>
-      <input type={props.type} id={props.id} onChange={inputHandler} value={valueAssignHandler} />
+      <input
+        type={props.type}
+        id={props.id}
+        onChange={inputHandler}
+        value={props.inputDataValue[props.id]}
+      />
     </p>
   );
 };

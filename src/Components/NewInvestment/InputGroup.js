@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import InputItem from "./InputItem";
 import styles from "./InputGroup.module.css";
 
 const InputGroup = (props) => {
-  const [inputGroupData, setInputGroupData] = useState({});
-
-  useEffect(() => {
-    props.onGroupDataChange(inputGroupData);
-  }, [inputGroupData]);
+  let inputGroupData = {};
 
   const inputHandler = (inputDataItem) => {
-    setInputGroupData((prevGroupData) => ({
-      ...prevGroupData,
-      ...inputDataItem,
-    }));
+    const updatedData = { ...inputGroupData, ...inputDataItem };
+    inputGroupData = updatedData;
+    props.onGroupDataChange(inputGroupData);
   };
 
   return (

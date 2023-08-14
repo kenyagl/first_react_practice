@@ -30,25 +30,48 @@ const INPUT_GROUPS = [
   ],
 ];
 
-const InvestmentForm = (props) => {
-  const [inputData, setInputData] = useState({});
+const InvestmentForm = () => {
+  const [inputData, setInputData] = useState({
+    "current-savings": 0,
+    "yearly-contribution": 0,
+    "expected-return": 0,
+    duration: 0,
+  });
 
-  const calculateHandler = (event) => {
-    event.preventDefault();
-    console.log("Form submitted. Input data:", inputData);
-    setInputData({});
-  };
-
-  // useEffect(() => {
-  //   console.log("all input data:", inputData);
-  // }, [inputData]);
+  // useEffect(() => { console.log("Data change. Input data:", inputData)}, [inputData]);
 
   const formDataHandler = (formGroupData) => {
     setInputData((prevData) => ({ ...prevData, ...formGroupData }));
   };
 
+  const calculateHandler = (event) => {
+    event.preventDefault();
+    console.log("Form submitted. Input data:", inputData);
+
+    setInputData((prevData) => ({
+      "current-savings": 0,
+      "yearly-contribution": 0,
+      "expected-return": 0,
+      duration: 0,
+    }));
+  };
+
+  const resetHandler = () => {
+    console.log("Reset button clicked.");
+    setInputData({
+      "current-savings": 0,
+      "yearly-contribution": 0,
+      "expected-return": 0,
+      duration: 0,
+    });
+  };
+
   return (
-    <form className={styles.form} onSubmit={calculateHandler}>
+    <form
+      className={styles.form}
+      onSubmit={calculateHandler}
+      onReset={resetHandler}
+    >
       {INPUT_GROUPS.map((inputGroup) => (
         <InputGroup
           key={`${inputGroup.map((input) => input.id)}`}
