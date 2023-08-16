@@ -18,7 +18,7 @@ const InputItem = (props) => {
         type={props.type}
         id={props.id}
         onChange={inputHandler}
-        value={props.inputDataValue[props.id] || 0}
+        value={props.inputDataValue[props.id] || ""}
       />
     </p>
   );

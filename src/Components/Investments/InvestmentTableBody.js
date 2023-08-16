@@ -7,15 +7,20 @@ const InvestmentTableBody = (props) => {
   const displayData = [];
 
   let totalInterest = 0;
-  let investedCapital = yearlyData[0].savingsEndOfYear - yearlyData[0].yearlyContribution - yearlyData[0].yearlyInterest;
-
+  let investedCapital = 0;
+  
   useEffect(() => {
     console.log("invested capital: " + investedCapital);
   }, [investedCapital]);
 
   for (let i = 0; i < yearlyData.length; i++) {
-    totalInterest += yearlyData[i].yearlyInterest;
-    investedCapital += yearlyData[i].yearlyContribution;
+    if (i === 0) {
+      totalInterest = yearlyData[i].yearlyInterest;
+      investedCapital = yearlyData[i].savingsEndOfYear - yearlyData[i].yearlyInterest;
+    }else{
+      totalInterest += yearlyData[i].yearlyInterest;
+      investedCapital += yearlyData[i].yearlyContribution;
+    }
 
     const yearData = {
       year: yearlyData[i].year,
