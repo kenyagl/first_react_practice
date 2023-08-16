@@ -14,7 +14,7 @@ const Investments = (props) => {
 
   const calculateHandler = (inputData) => {
     let currentSavings = +inputData["current-savings"];
-    const yearlyContribution = +inputData["yearly-contribution"]; // as mentioned: feel free to change the shape...
+    const yearlyContribution = +inputData["yearly-contribution"];
     const expectedReturn = +inputData["expected-return"] / 100;
     const duration = +inputData["duration"];
 
@@ -23,7 +23,7 @@ const Investments = (props) => {
     for (let i = 0; i < duration; i++) {
       const yearlyInterest = currentSavings * expectedReturn;
       const newSavings = currentSavings + yearlyInterest + yearlyContribution;
-
+      
       updatedYearlyData.push({
         year: i + 1,
         yearlyInterest: yearlyInterest,
@@ -39,7 +39,7 @@ const Investments = (props) => {
   return (
     <table className={styles.result}>
       <InvestmentTableHead />
-      <InvestmentTableBody yearData={yearlyData}/>
+      <InvestmentTableBody yearData={yearlyData} />
     </table>
   );
 };

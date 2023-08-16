@@ -1,33 +1,39 @@
+import { useEffect } from "react";
 import styles from "./InvestmentTableBody.module.css";
 
 const InvestmentTableBody = (props) => {
   const yearlyData = props.yearData;
+  console.log("yearlyData: " + JSON.stringify(yearlyData));
   const displayData = [];
 
-  let totalSavings = 0;
   let totalInterest = 0;
-  let investedCapital = 0;
+  let investedCapital = yearlyData[0].savingsEndOfYear - yearlyData[0].yearlyContribution - yearlyData[0].yearlyInterest;
+
+  useEffect(() => {
+    console.log("invested capital: " + investedCapital);
+  }, [investedCapital]);
 
   for (let i = 0; i < yearlyData.length; i++) {
-    totalSavings += yearlyData[i].savingsEndOfYear;
     totalInterest += yearlyData[i].yearlyInterest;
     investedCapital += yearlyData[i].yearlyContribution;
 
     const yearData = {
       year: yearlyData[i].year,
-      totalSavings: totalSavings, 
-      interestYear: yearlyData[i].yearlyInterest,
-      totalInterest: totalInterest, 
-      investedCapital: investedCapital
-    }
+      totalSavings: "$"  + yearlyData[i].savingsEndOfYear.toFixed(2),
+      interestYear: "$"  + yearlyData[i].yearlyInterest.toFixed(2),
+      totalInterest: "$"  + totalInterest.toFixed(2),
+      investedCapital: "$"  + investedCapital.toFixed(2),
+    };
 
     displayData.push(yearData);
   }
 
+  console.log("displayData: " + JSON.stringify(displayData));
+
   return (
     <tbody className={styles.tbody}>
       {displayData.map((dispData) => (
-        <tr>
+        <tr key={`tr_${dispData.year}`} id={`tr_ ${dispData.year}`}>
           <td>{dispData.year}</td>
           <td>{dispData.totalSavings}</td>
           <td>{dispData.interestYear}</td>
