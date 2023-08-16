@@ -5,23 +5,24 @@ import Investments from "./Components/Investments/Investments";
 
 function App() {
   const [inputData, setInputData] = useState({});
-  const [investments, setInvestments] = useState([]);
+  const [investment, setInvestment] = useState({});
 
   useEffect(() => {
-    console.log("Investments updated:", investments);
-  }, [investments]);
+    console.log("Investments updated:", investment);
+  }, [investment]);
 
   const inputDataHandler = (formData) => {
     setInputData((prevData) => ({ ...prevData, ...formData }));
   };
 
-  const addExpense = (investment) => {
-    setInvestments((prevInvestments) => [...prevInvestments, investment]);
+  const calculateInvestment = (userData) => {
+    setInvestment(userData);
   };
 
   const calculateHandler = (event) => {
     event.preventDefault();
-    addExpense(inputData);
+    calculateInvestment(inputData);
+    // setInvestment(userData);
     resetHandler();
   };
 
@@ -39,8 +40,11 @@ function App() {
         inputDataValue={inputData}
       />
 
-      {investments.length === 0 && <p> No expenses </p>}
-      {investments.length > 0 && <Investments />}
+      {investment && Object.keys(investment).length === 0 ? (
+        <p> Fill the form to calculate your returns! </p>
+      ) : (
+        <Investments userData={investment} />
+      )}
     </div>
   );
 }
