@@ -4,12 +4,11 @@ import InvestmentTableHead from "./InvestmentTableHead";
 import InvestmentTableBody from "./InvestmentTableBody";
 
 const Investments = (props) => {
-  let yearlyData = [];
+  const [yearlyData, setYearlyData] = useState([]);
 
   useEffect(() => {
     {
       calculateHandler(props.userData);
-      console.log("year data: " + JSON.stringify(yearlyData));
     }
   }, [props.userData]);
 
@@ -34,16 +33,13 @@ const Investments = (props) => {
 
       currentSavings = newSavings;
     }
-    yearlyData = updatedYearlyData;
-
+    setYearlyData(updatedYearlyData);
   };
 
   return (
     <table className={styles.result}>
-      <p>{yearlyData.duration}</p>
-      <p>{yearlyData.yearlyInterest}</p>
       <InvestmentTableHead />
-      <InvestmentTableBody investmentList={yearlyData} />
+      <InvestmentTableBody yearData={yearlyData}/>
     </table>
   );
 };
